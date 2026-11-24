@@ -8,3 +8,5 @@ Subtotal = Salary_cost + total_cloud_cost
 VAT=Subtotal * 0.14
 Total=Subtotal + VAT
 print(f"THE TOTAL COST OF THE PROJECT IS {Total}")
+
+
