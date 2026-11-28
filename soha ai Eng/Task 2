@@ -1,1 +1,92 @@
+customers = [
+    "Ahmed", "Sara", "Omar", "Mona",
+    "Ali", "Nour", "Youssef", "Hana",
+    "Khaled", "Mariam", "Hassan", "Laila"
+]
 
+scores = [
+    91, 45, 78, 66, 88, 30,
+    72, 95, 51, 60, 84, 39
+]
+
+risk_levels = []
+high = 0
+medium = 0
+low = 0
+total = 0
+
+for i in range(len(customers)):
+    s = scores[i]
+    total += s
+    if s >= 85:
+        risk_levels.append("High")
+        high += 1
+    elif s >= 60:
+        risk_levels.append("Medium")
+        medium += 1
+    else:
+        risk_levels.append("Low")
+        low += 1
+
+avg = total / len(scores)
+
+best_name = customers[0]
+best_score = scores[0]
+worst_name = customers[0]
+worst_score = scores[0]
+
+for i in range(len(customers)):
+    if scores[i] < best_score:
+        best_score = scores[i]
+        best_name = customers[i]
+    if scores[i] > worst_score:
+        worst_score = scores[i]
+        worst_name = customers[i]
+
+while True:
+    print("\nMenu:")
+    print("1. Show All Customers")
+    print("2. Search for a Customer")
+    print("0. Exit")
+
+    ch = input("Enter your choice: ")
+
+    if ch == "1":
+        print("\nCUSTOMER RISK REPORT")
+        print("Name\t\tScore\tRisk")
+        for i in range(len(customers)):
+            name = customers[i]
+            s = scores[i]
+            r = risk_levels[i]
+            if len(name) >= 7:
+                print(name + "\t" + str(s) + "\t" + r)
+            else:
+                print(name + "\t\t" + str(s) + "\t" + r)
+
+        print("\nSummary:")
+        print("High Risk:", high)
+        print("Medium Risk:", medium)
+        print("Low Risk:", low)
+        print("Average Score:", round(avg, 2))
+        print("Best Customer:", best_name, "(" + str(best_score) + ")")
+        print("Worst Customer:", worst_name, "(" + str(worst_score) + ")")
+
+    elif ch == "2":
+        target = input("Enter customer name: ")
+        found = False
+        for i in range(len(customers)):
+            if customers[i].lower() == target.lower():
+                print("Name:", customers[i])
+                print("Score:", scores[i])
+                print("Risk:", risk_levels[i])
+                found = True
+                break
+        if found == False:
+            print("Customer not found!")
+
+    elif ch == "0":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice!")
